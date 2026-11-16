@@ -1,9 +1,9 @@
 /**
  * Employee Management System - CRUD Operations
- * Connected to Live API: http://my-api-emp.runasp.net
+ * Connected to Live API: https://my-api-emp.runasp.net
  */
 
-const API_BASE_URL = "http://my-api-emp.runasp.net/api/Employee";
+const API_BASE_URL = "https://my-api-emp.runasp.net/api/Employee";
 
 // Application State
 let employeesList = [];
