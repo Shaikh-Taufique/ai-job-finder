@@ -19,6 +19,7 @@ const refreshBtn = document.getElementById("refreshBtn");
 const addBtn = document.getElementById("addBtn");
 const searchInput = document.getElementById("searchInput");
 const clearSearchBtn = document.getElementById("clearSearchBtn");
+const tableWrapper = document.getElementById("tableWrapper");
 
 // Employee Form Modal Elements
 const employeeModal = document.getElementById("employeeModal");
@@ -131,6 +132,7 @@ async function loadEmployees(showToastOnSuccess = false) {
     refreshBtn.disabled = true;
     statusText.textContent = "Loading...";
 
+    if (tableWrapper) tableWrapper.classList.remove("table-scrollable");
     employeeTable.replaceChildren();
     const loadingRow = document.createElement("tr");
     loadingRow.innerHTML = `
@@ -283,6 +285,7 @@ function renderTable(list) {
     employeeTable.replaceChildren();
 
     if (!list || list.length === 0) {
+        if (tableWrapper) tableWrapper.classList.remove("table-scrollable");
         const emptyRow = document.createElement("tr");
         emptyRow.innerHTML = `
             <td colspan="4" class="message">
@@ -294,7 +297,13 @@ function renderTable(list) {
         return;
     }
 
-    recordCount.textContent = `${list.length} item${list.length === 1 ? "" : "s"}`;
+    // Enable scroll in staff directory when employee count is greater than 10
+    const isScrollable = list.length > 10;
+    if (tableWrapper) {
+        tableWrapper.classList.toggle("table-scrollable", isScrollable);
+    }
+
+    recordCount.textContent = `${list.length} item${list.length === 1 ? "" : "s"}${isScrollable ? " • Scrollable" : ""}`;
 
     list.forEach((emp) => {
         const row = document.createElement("tr");
@@ -346,6 +355,7 @@ function renderTable(list) {
 }
 
 function renderErrorState(message) {
+    if (tableWrapper) tableWrapper.classList.remove("table-scrollable");
     employeeTable.replaceChildren();
     const errorRow = document.createElement("tr");
     errorRow.innerHTML = `
