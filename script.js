@@ -312,7 +312,7 @@ function renderTable(list) {
         const idCell = document.createElement("td");
         const idBadge = document.createElement("span");
         idBadge.className = "emp-id-badge";
-        idBadge.textContent = `#${emp.id}`;
+        idBadge.textContent = emp.id;
         idCell.appendChild(idBadge);
 
         // Name column
