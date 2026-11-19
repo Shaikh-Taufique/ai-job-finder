@@ -90,6 +90,34 @@ document.addEventListener("DOMContentLoaded", () => {
             if (deleteModal.classList.contains("active")) closeDeleteModal();
         }
     });
+
+    // Mobile Navigation Toggle
+    const mobileMenuToggle = document.getElementById("mobileMenuToggle");
+    const mobileNavDrawer = document.getElementById("mobileNavDrawer");
+    if (mobileMenuToggle && mobileNavDrawer) {
+        mobileMenuToggle.addEventListener("click", () => {
+            mobileMenuToggle.classList.toggle("active");
+            mobileNavDrawer.classList.toggle("active");
+        });
+
+        // Close mobile drawer on link click
+        const mobileLinks = mobileNavDrawer.querySelectorAll(".mobile-nav-link");
+        mobileLinks.forEach((link) => {
+            link.addEventListener("click", () => {
+                mobileMenuToggle.classList.remove("active");
+                mobileNavDrawer.classList.remove("active");
+            });
+        });
+    }
+
+    // Smooth Scroll to Top
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
+    if (scrollTopBtn) {
+        scrollTopBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    }
 });
 
 // ==========================================
